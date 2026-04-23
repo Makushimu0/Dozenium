@@ -1,0 +1,843 @@
+
+> Configure project :
+Fabric Loom: 1.14.10
+Refresh dependencies is in use, loom will be significantly slower.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using of the official minecraft mappings is at your own risk!
+Please make sure to read and understand the following license:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (c) 2020 Microsoft Corporation. These mappings are provided "as-is" and you bear the risk of using them. You may copy and use the mappings for development purposes, but you may not redistribute the mappings complete and unmodified. Microsoft makes no warranties, express or implied, with respect to the mappings provided here.  Use and modification of this document or the source code (in any form) of Minecraft: Java Edition is governed by the Minecraft End User License Agreement available at https://account.mojang.com/documents/minecraft_eula.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:remapping sources
+
+> Task :clean
+> Task :compileJava
+> Task :processResources
+> Task :classes
+
+> Task :compileClientJava
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:19: error: cannot find symbol
+import net.minecraft.client.gui.DrawContext;
+                               ^
+  symbol:   class DrawContext
+  location: package net.minecraft.client.gui
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:21: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:22: error: package net.minecraft.text does not exist
+import net.minecraft.text.OrderedText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:28: error: cannot find symbol
+    protected abstract void drawText(DrawContext context, List<OrderedText> text, int x, int y, int color);
+                                     ^
+  symbol:   class DrawContext
+  location: class DozenalAdvancementWidgetMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:28: error: cannot find symbol
+    protected abstract void drawText(DrawContext context, List<OrderedText> text, int x, int y, int color);
+                                                               ^
+  symbol:   class OrderedText
+  location: class DozenalAdvancementWidgetMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:56: error: cannot find symbol
+    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, DrawContext context, List<OrderedText> lines, int x, int y, int color) {
+                                                                              ^
+  symbol:   class DrawContext
+  location: class DozenalAdvancementWidgetMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:56: error: cannot find symbol
+    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, DrawContext context, List<OrderedText> lines, int x, int y, int color) {
+                                                                                                        ^
+  symbol:   class OrderedText
+  location: class DozenalAdvancementWidgetMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:8: error: package net.minecraft.client.gui.screen.ingame does not exist
+import net.minecraft.client.gui.screen.ingame.AnvilScreen;
+                                             ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:9: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:10: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:26: error: cannot find symbol
+    private MutableText dozenium$interceptAnvilCost(String key, Object[] args) {
+            ^
+  symbol:   class MutableText
+  location: class DozenalAnvilScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:13: error: package net.minecraft.client.font does not exist
+import net.minecraft.client.font.DrawnTextConsumer;
+                                ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:14: error: package net.minecraft.client.gui.screen.ingame does not exist
+import net.minecraft.client.gui.screen.ingame.BookEditScreen;
+                                             ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:15: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:16: error: package net.minecraft.text does not exist
+import net.minecraft.text.Style;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:17: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:22: error: cannot find symbol
+    @Shadow private Text pageIndicatorText;
+                    ^
+  symbol:   class Text
+  location: class DozenalBookEditScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:34: error: cannot find symbol
+    private void dozenium$updatePageIndicatorEdit(DrawnTextConsumer drawnTextConsumer, CallbackInfo ci) {
+                                                  ^
+  symbol:   class DrawnTextConsumer
+  location: class DozenalBookEditScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:11: error: package net.minecraft.client.font does not exist
+import net.minecraft.client.font.DrawnTextConsumer;
+                                ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:12: error: package net.minecraft.client.gui.screen.ingame does not exist
+import net.minecraft.client.gui.screen.ingame.BookScreen;
+                                             ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:13: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:14: error: package net.minecraft.text does not exist
+import net.minecraft.text.Style;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:15: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:20: error: cannot find symbol
+    @Shadow private Text pageIndexText;
+                    ^
+  symbol:   class Text
+  location: class DozenalBookScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:33: error: cannot find symbol
+    private void dozenium$replacePageText(DrawnTextConsumer drawer, boolean bl, CallbackInfo ci) {
+                                          ^
+  symbol:   class DrawnTextConsumer
+  location: class DozenalBookScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:11: error: package net.minecraft.client.gui.screen does not exist
+import net.minecraft.client.gui.screen.DeathScreen;
+                                      ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:12: error: package net.minecraft.client.gui.screen does not exist
+import net.minecraft.client.gui.screen.Screen;
+                                      ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:13: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:14: error: cannot find symbol
+import net.minecraft.util.Formatting;
+                         ^
+  symbol:   class Formatting
+  location: package net.minecraft.util
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:17: error: cannot find symbol
+public abstract class DozenalDeathScreenMixin extends Screen {
+                                                      ^
+  symbol: class Screen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:19: error: cannot find symbol
+    @Shadow @Final private Text scoreText;
+                           ^
+  symbol:   class Text
+  location: class DozenalDeathScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:21: error: cannot find symbol
+    protected DozenalDeathScreenMixin(Text title) {
+                                      ^
+  symbol:   class Text
+  location: class DozenalDeathScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:33: error: cannot find symbol
+    private Text dozenium$interceptScoreTextRead(DeathScreen instance) {
+                                                 ^
+  symbol:   class DeathScreen
+  location: class DozenalDeathScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:33: error: cannot find symbol
+    private Text dozenium$interceptScoreTextRead(DeathScreen instance) {
+            ^
+  symbol:   class Text
+  location: class DozenalDeathScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenBackgroundMixin.java:8: error: package net.minecraft.client.gui.screen.ingame does not exist
+import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
+                                             ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:8: error: package net.minecraft.client.gui.screen.ingame does not exist
+import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
+                                             ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:9: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:10: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:25: error: cannot find symbol
+    private MutableText dozenium$interceptEnchantTooltip(String key, Object[] args) {
+            ^
+  symbol:   class MutableText
+  location: class DozenalEnchantmentScreenMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:9: error: package net.minecraft.client.font does not exist
+import net.minecraft.client.font.TextRenderer;
+                                ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:10: error: cannot find symbol
+import net.minecraft.client.gui.DrawContext;
+                               ^
+  symbol:   class DrawContext
+  location: package net.minecraft.client.gui
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:11: error: package net.minecraft.client.gui.hud does not exist
+import net.minecraft.client.gui.hud.InGameHud;
+                                   ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:12: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:13: error: cannot find symbol
+import net.minecraft.util.Colors;
+                         ^
+  symbol:   class Colors
+  location: package net.minecraft.util
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:25: error: cannot find symbol
+    private void redirectDrawXpLevel(DrawContext context, TextRenderer textRenderer, int level) {
+                                     ^
+  symbol:   class DrawContext
+  location: class DozenalExperienceLevelMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:25: error: cannot find symbol
+    private void redirectDrawXpLevel(DrawContext context, TextRenderer textRenderer, int level) {
+                                                          ^
+  symbol:   class TextRenderer
+  location: class DozenalExperienceLevelMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemCountMixin.java:8: error: cannot find symbol
+import net.minecraft.client.gui.DrawContext;
+                               ^
+  symbol:   class DrawContext
+  location: package net.minecraft.client.gui
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:16: error: package net.minecraft.entity.player does not exist
+import net.minecraft.entity.player.PlayerEntity;
+                                  ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:17: error: package net.minecraft.item does not exist
+import net.minecraft.item.Item;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:18: error: package net.minecraft.item does not exist
+import net.minecraft.item.ItemStack;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:19: error: package net.minecraft.item.tooltip does not exist
+import net.minecraft.item.tooltip.TooltipType;
+                                 ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:20: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:21: error: package net.minecraft.text does not exist
+import net.minecraft.text.PlainTextContent;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:22: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:23: error: package net.minecraft.text does not exist
+import net.minecraft.text.TextContent;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:24: error: package net.minecraft.text does not exist
+import net.minecraft.text.TranslatableTextContent;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: package Item does not exist
+    private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                   ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: cannot find symbol
+    private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                                                      ^
+  symbol:   class PlayerEntity
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: cannot find symbol
+    private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                                                                           ^
+  symbol:   class TooltipType
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: cannot find symbol
+    private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                                                                                                                         ^
+  symbol:   class Text
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:50: error: cannot find symbol
+    private Text convertText(Text text) {
+                             ^
+  symbol:   class Text
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:50: error: cannot find symbol
+    private Text convertText(Text text) {
+            ^
+  symbol:   class Text
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:80: error: cannot find symbol
+    private MutableText handleTranslatable(TranslatableTextContent translatable) {
+                                           ^
+  symbol:   class TranslatableTextContent
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:80: error: cannot find symbol
+    private MutableText handleTranslatable(TranslatableTextContent translatable) {
+            ^
+  symbol:   class MutableText
+  location: class DozenalItemTooltipMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:8: error: package net.minecraft.client.gui.screen.recipebook does not exist
+import net.minecraft.client.gui.screen.recipebook.RecipeBookResults;
+                                                 ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:9: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:10: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:26: error: cannot find symbol
+    private MutableText dozenium$interceptRecipePageText(String key, Object[] args) {
+            ^
+  symbol:   class MutableText
+  location: class DozenalRecipeBookMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:17: error: package net.minecraft.client.option does not exist
+import net.minecraft.client.option.SimpleOption;
+                                  ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:18: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:24: error: cannot find symbol
+    private Function<T, Text> textGetter;
+                        ^
+  symbol:   class Text
+  location: class DozenalSimpleOptionMixin<T>
+  where T is a type-variable:
+    T extends Object declared in class DozenalSimpleOptionMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:70: error: cannot find symbol
+    private Text processPercentString(String raw, Text originalText) {
+                                                  ^
+  symbol:   class Text
+  location: class DozenalSimpleOptionMixin<T>
+  where T is a type-variable:
+    T extends Object declared in class DozenalSimpleOptionMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:70: error: cannot find symbol
+    private Text processPercentString(String raw, Text originalText) {
+            ^
+  symbol:   class Text
+  location: class DozenalSimpleOptionMixin<T>
+  where T is a type-variable:
+    T extends Object declared in class DozenalSimpleOptionMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:105: error: cannot find symbol
+    private Text processNormalString(String raw, Text originalText) {
+                                                 ^
+  symbol:   class Text
+  location: class DozenalSimpleOptionMixin<T>
+  where T is a type-variable:
+    T extends Object declared in class DozenalSimpleOptionMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:105: error: cannot find symbol
+    private Text processNormalString(String raw, Text originalText) {
+            ^
+  symbol:   class Text
+  location: class DozenalSimpleOptionMixin<T>
+  where T is a type-variable:
+    T extends Object declared in class DozenalSimpleOptionMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\EntityStatsEntryMixin.java:8: error: package net.minecraft.text does not exist
+import net.minecraft.text.MutableText;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\EntityStatsEntryMixin.java:9: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\EntityStatsEntryMixin.java:27: error: cannot find symbol
+    private MutableText convertNumbersToDozenal(String key, Object[] args) {
+            ^
+  symbol:   class MutableText
+  location: class EntityStatsEntryMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ItemStatEntryMixin.java:8: error: package net.minecraft.stat does not exist
+import net.minecraft.stat.Stat;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ItemStatEntryMixin.java:26: error: cannot find symbol
+    private String changeToDuodecimal(Stat<?> instance, int value) {
+                                      ^
+  symbol:   class Stat
+  location: class ItemStatEntryMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ServerEntryMixin.java:11: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ServerEntryMixin.java:28: error: cannot find symbol
+    private Text convertServerPlayerCount(Text text) {
+                                          ^
+  symbol:   class Text
+  location: class ServerEntryMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ServerEntryMixin.java:28: error: cannot find symbol
+    private Text convertServerPlayerCount(Text text) {
+            ^
+  symbol:   class Text
+  location: class ServerEntryMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:9: error: package net.minecraft.client.gui.screen.ingame does not exist
+import net.minecraft.client.gui.screen.ingame.StatusEffectsDisplay;
+                                             ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:10: error: package net.minecraft.entity.effect does not exist
+import net.minecraft.entity.effect.StatusEffectInstance;
+                                  ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:11: error: package net.minecraft.text does not exist
+import net.minecraft.text.Text;
+                         ^
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:28: error: cannot find symbol
+    private Text injectDozenalDuration(StatusEffectInstance instance, float multiplier, float tickRate) {
+                                       ^
+  symbol:   class StatusEffectInstance
+  location: class StatusEffectsDisplayMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:28: error: cannot find symbol
+    private Text injectDozenalDuration(StatusEffectInstance instance, float multiplier, float tickRate) {
+            ^
+  symbol:   class Text
+  location: class StatusEffectsDisplayMixin
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:12: error: cannot find symbol
+@Mixin(AnvilScreen.class)
+       ^
+  symbol: class AnvilScreen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:19: error: cannot find symbol
+@Mixin(BookEditScreen.class)
+       ^
+  symbol: class BookEditScreen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:17: error: cannot find symbol
+@Mixin(BookScreen.class)
+       ^
+  symbol: class BookScreen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:16: error: cannot find symbol
+@Mixin(DeathScreen.class)
+       ^
+  symbol: class DeathScreen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenBackgroundMixin.java:10: error: cannot find symbol
+@Mixin(EnchantmentScreen.class)
+       ^
+  symbol: class EnchantmentScreen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:12: error: cannot find symbol
+@Mixin(EnchantmentScreen.class)
+       ^
+  symbol: class EnchantmentScreen
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:16: error: cannot find symbol
+@Mixin(InGameHud.class)
+       ^
+  symbol: class InGameHud
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemCountMixin.java:10: error: cannot find symbol
+@Mixin(DrawContext.class)
+       ^
+  symbol: class DrawContext
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:26: error: cannot find symbol
+@Mixin(ItemStack.class)
+       ^
+  symbol: class ItemStack
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:12: error: cannot find symbol
+@Mixin(RecipeBookResults.class)
+       ^
+  symbol: class RecipeBookResults
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:20: error: cannot find symbol
+@Mixin(SimpleOption.class)
+       ^
+  symbol: class SimpleOption
+C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:13: error: cannot find symbol
+@Mixin(StatusEffectsDisplay.class)
+       ^
+  symbol: class StatusEffectsDisplay
+100 errors
+
+> Task :compileClientJava FAILED
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileClientJava'.
+> Compilation failed; see the compiler output below.
+[Incubating] Problems report is available at: file:///C:/Users/ender/Downloads/dozenium-template-1.21.11/build/reports/problems/problems-report.html
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:19: error: cannot find symbol
+  import net.minecraft.client.gui.DrawContext;
+                                 ^
+    symbol:   class DrawContext
+    location: package net.minecraft.client.gui
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:28: error: cannot find symbol
+      protected abstract void drawText(DrawContext context, List<OrderedText> text, int x, int y, int color);
+                                       ^
+    symbol:   class DrawContext
+    location: class DozenalAdvancementWidgetMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:28: error: cannot find symbol
+      protected abstract void drawText(DrawContext context, List<OrderedText> text, int x, int y, int color);
+                                                                 ^
+    symbol:   class OrderedText
+    location: class DozenalAdvancementWidgetMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:56: error: cannot find symbol
+      private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, DrawContext context, List<OrderedText> lines, int x, int y, int color) {
+                                                                                ^
+    symbol:   class DrawContext
+    location: class DozenalAdvancementWidgetMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:56: error: cannot find symbol
+      private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, DrawContext context, List<OrderedText> lines, int x, int y, int color) {
+                                                                                                          ^
+    symbol:   class OrderedText
+    location: class DozenalAdvancementWidgetMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:26: error: cannot find symbol
+      private MutableText dozenium$interceptAnvilCost(String key, Object[] args) {
+              ^
+    symbol:   class MutableText
+    location: class DozenalAnvilScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:22: error: cannot find symbol
+      @Shadow private Text pageIndicatorText;
+                      ^
+    symbol:   class Text
+    location: class DozenalBookEditScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:34: error: cannot find symbol
+      private void dozenium$updatePageIndicatorEdit(DrawnTextConsumer drawnTextConsumer, CallbackInfo ci) {
+                                                    ^
+    symbol:   class DrawnTextConsumer
+    location: class DozenalBookEditScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:20: error: cannot find symbol
+      @Shadow private Text pageIndexText;
+                      ^
+    symbol:   class Text
+    location: class DozenalBookScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:33: error: cannot find symbol
+      private void dozenium$replacePageText(DrawnTextConsumer drawer, boolean bl, CallbackInfo ci) {
+                                            ^
+    symbol:   class DrawnTextConsumer
+    location: class DozenalBookScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:14: error: cannot find symbol
+  import net.minecraft.util.Formatting;
+                           ^
+    symbol:   class Formatting
+    location: package net.minecraft.util
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:19: error: cannot find symbol
+      @Shadow @Final private Text scoreText;
+                             ^
+    symbol:   class Text
+    location: class DozenalDeathScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:21: error: cannot find symbol
+      protected DozenalDeathScreenMixin(Text title) {
+                                        ^
+    symbol:   class Text
+    location: class DozenalDeathScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:33: error: cannot find symbol
+      private Text dozenium$interceptScoreTextRead(DeathScreen instance) {
+                                                   ^
+    symbol:   class DeathScreen
+    location: class DozenalDeathScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:33: error: cannot find symbol
+      private Text dozenium$interceptScoreTextRead(DeathScreen instance) {
+              ^
+    symbol:   class Text
+    location: class DozenalDeathScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:25: error: cannot find symbol
+      private MutableText dozenium$interceptEnchantTooltip(String key, Object[] args) {
+              ^
+    symbol:   class MutableText
+    location: class DozenalEnchantmentScreenMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:10: error: cannot find symbol
+  import net.minecraft.client.gui.DrawContext;
+                                 ^
+    symbol:   class DrawContext
+    location: package net.minecraft.client.gui
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:13: error: cannot find symbol
+  import net.minecraft.util.Colors;
+                           ^
+    symbol:   class Colors
+    location: package net.minecraft.util
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:25: error: cannot find symbol
+      private void redirectDrawXpLevel(DrawContext context, TextRenderer textRenderer, int level) {
+                                       ^
+    symbol:   class DrawContext
+    location: class DozenalExperienceLevelMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:25: error: cannot find symbol
+      private void redirectDrawXpLevel(DrawContext context, TextRenderer textRenderer, int level) {
+                                                            ^
+    symbol:   class TextRenderer
+    location: class DozenalExperienceLevelMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemCountMixin.java:8: error: cannot find symbol
+  import net.minecraft.client.gui.DrawContext;
+                                 ^
+    symbol:   class DrawContext
+    location: package net.minecraft.client.gui
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: cannot find symbol
+      private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                                                        ^
+    symbol:   class PlayerEntity
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: cannot find symbol
+      private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                                                                             ^
+    symbol:   class TooltipType
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: cannot find symbol
+      private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                                                                                                                           ^
+    symbol:   class Text
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:50: error: cannot find symbol
+      private Text convertText(Text text) {
+                               ^
+    symbol:   class Text
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:50: error: cannot find symbol
+      private Text convertText(Text text) {
+              ^
+    symbol:   class Text
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:80: error: cannot find symbol
+      private MutableText handleTranslatable(TranslatableTextContent translatable) {
+                                             ^
+    symbol:   class TranslatableTextContent
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:80: error: cannot find symbol
+      private MutableText handleTranslatable(TranslatableTextContent translatable) {
+              ^
+    symbol:   class MutableText
+    location: class DozenalItemTooltipMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:26: error: cannot find symbol
+      private MutableText dozenium$interceptRecipePageText(String key, Object[] args) {
+              ^
+    symbol:   class MutableText
+    location: class DozenalRecipeBookMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:24: error: cannot find symbol
+      private Function<T, Text> textGetter;
+                          ^
+    symbol:   class Text
+    location: class DozenalSimpleOptionMixin<T>
+    where T is a type-variable:
+      T extends Object declared in class DozenalSimpleOptionMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:70: error: cannot find symbol
+      private Text processPercentString(String raw, Text originalText) {
+                                                    ^
+    symbol:   class Text
+    location: class DozenalSimpleOptionMixin<T>
+    where T is a type-variable:
+      T extends Object declared in class DozenalSimpleOptionMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:70: error: cannot find symbol
+      private Text processPercentString(String raw, Text originalText) {
+              ^
+    symbol:   class Text
+    location: class DozenalSimpleOptionMixin<T>
+    where T is a type-variable:
+      T extends Object declared in class DozenalSimpleOptionMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:105: error: cannot find symbol
+      private Text processNormalString(String raw, Text originalText) {
+                                                   ^
+    symbol:   class Text
+    location: class DozenalSimpleOptionMixin<T>
+    where T is a type-variable:
+      T extends Object declared in class DozenalSimpleOptionMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:105: error: cannot find symbol
+      private Text processNormalString(String raw, Text originalText) {
+              ^
+    symbol:   class Text
+    location: class DozenalSimpleOptionMixin<T>
+    where T is a type-variable:
+      T extends Object declared in class DozenalSimpleOptionMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\EntityStatsEntryMixin.java:27: error: cannot find symbol
+      private MutableText convertNumbersToDozenal(String key, Object[] args) {
+              ^
+    symbol:   class MutableText
+    location: class EntityStatsEntryMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ItemStatEntryMixin.java:26: error: cannot find symbol
+      private String changeToDuodecimal(Stat<?> instance, int value) {
+                                        ^
+    symbol:   class Stat
+    location: class ItemStatEntryMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ServerEntryMixin.java:28: error: cannot find symbol
+      private Text convertServerPlayerCount(Text text) {
+                                            ^
+    symbol:   class Text
+    location: class ServerEntryMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ServerEntryMixin.java:28: error: cannot find symbol
+      private Text convertServerPlayerCount(Text text) {
+              ^
+    symbol:   class Text
+    location: class ServerEntryMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:28: error: cannot find symbol
+      private Text injectDozenalDuration(StatusEffectInstance instance, float multiplier, float tickRate) {
+                                         ^
+    symbol:   class StatusEffectInstance
+    location: class StatusEffectsDisplayMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:28: error: cannot find symbol
+      private Text injectDozenalDuration(StatusEffectInstance instance, float multiplier, float tickRate) {
+              ^
+    symbol:   class Text
+    location: class StatusEffectsDisplayMixin
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:17: error: cannot find symbol
+  public abstract class DozenalDeathScreenMixin extends Screen {
+                                                        ^
+    symbol: class Screen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:12: error: cannot find symbol
+  @Mixin(AnvilScreen.class)
+         ^
+    symbol: class AnvilScreen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:19: error: cannot find symbol
+  @Mixin(BookEditScreen.class)
+         ^
+    symbol: class BookEditScreen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:17: error: cannot find symbol
+  @Mixin(BookScreen.class)
+         ^
+    symbol: class BookScreen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:16: error: cannot find symbol
+  @Mixin(DeathScreen.class)
+         ^
+    symbol: class DeathScreen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenBackgroundMixin.java:10: error: cannot find symbol
+  @Mixin(EnchantmentScreen.class)
+         ^
+    symbol: class EnchantmentScreen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:12: error: cannot find symbol
+  @Mixin(EnchantmentScreen.class)
+         ^
+    symbol: class EnchantmentScreen
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:16: error: cannot find symbol
+  @Mixin(InGameHud.class)
+         ^
+    symbol: class InGameHud
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemCountMixin.java:10: error: cannot find symbol
+  @Mixin(DrawContext.class)
+         ^
+    symbol: class DrawContext
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:26: error: cannot find symbol
+  @Mixin(ItemStack.class)
+         ^
+    symbol: class ItemStack
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:12: error: cannot find symbol
+  @Mixin(RecipeBookResults.class)
+         ^
+    symbol: class RecipeBookResults
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:20: error: cannot find symbol
+  @Mixin(SimpleOption.class)
+         ^
+    symbol: class SimpleOption
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:13: error: cannot find symbol
+  @Mixin(StatusEffectsDisplay.class)
+         ^
+    symbol: class StatusEffectsDisplay
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:21: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAdvancementWidgetMixin.java:22: error: package net.minecraft.text does not exist
+  import net.minecraft.text.OrderedText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:8: error: package net.minecraft.client.gui.screen.ingame does not exist
+  import net.minecraft.client.gui.screen.ingame.AnvilScreen;
+                                               ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:9: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalAnvilScreenMixin.java:10: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:13: error: package net.minecraft.client.font does not exist
+  import net.minecraft.client.font.DrawnTextConsumer;
+                                  ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:14: error: package net.minecraft.client.gui.screen.ingame does not exist
+  import net.minecraft.client.gui.screen.ingame.BookEditScreen;
+                                               ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:15: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:16: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Style;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookEditScreenMixin.java:17: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:11: error: package net.minecraft.client.font does not exist
+  import net.minecraft.client.font.DrawnTextConsumer;
+                                  ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:12: error: package net.minecraft.client.gui.screen.ingame does not exist
+  import net.minecraft.client.gui.screen.ingame.BookScreen;
+                                               ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:13: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:14: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Style;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalBookScreenMixin.java:15: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:11: error: package net.minecraft.client.gui.screen does not exist
+  import net.minecraft.client.gui.screen.DeathScreen;
+                                        ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:12: error: package net.minecraft.client.gui.screen does not exist
+  import net.minecraft.client.gui.screen.Screen;
+                                        ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalDeathScreenMixin.java:13: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenBackgroundMixin.java:8: error: package net.minecraft.client.gui.screen.ingame does not exist
+  import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
+                                               ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:8: error: package net.minecraft.client.gui.screen.ingame does not exist
+  import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
+                                               ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:9: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalEnchantmentScreenMixin.java:10: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:9: error: package net.minecraft.client.font does not exist
+  import net.minecraft.client.font.TextRenderer;
+                                  ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:11: error: package net.minecraft.client.gui.hud does not exist
+  import net.minecraft.client.gui.hud.InGameHud;
+                                     ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalExperienceLevelMixin.java:12: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:16: error: package net.minecraft.entity.player does not exist
+  import net.minecraft.entity.player.PlayerEntity;
+                                    ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:17: error: package net.minecraft.item does not exist
+  import net.minecraft.item.Item;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:18: error: package net.minecraft.item does not exist
+  import net.minecraft.item.ItemStack;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:19: error: package net.minecraft.item.tooltip does not exist
+  import net.minecraft.item.tooltip.TooltipType;
+                                   ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:20: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:21: error: package net.minecraft.text does not exist
+  import net.minecraft.text.PlainTextContent;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:22: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:23: error: package net.minecraft.text does not exist
+  import net.minecraft.text.TextContent;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:24: error: package net.minecraft.text does not exist
+  import net.minecraft.text.TranslatableTextContent;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalItemTooltipMixin.java:34: error: package Item does not exist
+      private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
+                                     ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:8: error: package net.minecraft.client.gui.screen.recipebook does not exist
+  import net.minecraft.client.gui.screen.recipebook.RecipeBookResults;
+                                                   ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:9: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalRecipeBookMixin.java:10: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:17: error: package net.minecraft.client.option does not exist
+  import net.minecraft.client.option.SimpleOption;
+                                    ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\DozenalSimpleOptionMixin.java:18: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\EntityStatsEntryMixin.java:8: error: package net.minecraft.text does not exist
+  import net.minecraft.text.MutableText;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\EntityStatsEntryMixin.java:9: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ItemStatEntryMixin.java:8: error: package net.minecraft.stat does not exist
+  import net.minecraft.stat.Stat;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\ServerEntryMixin.java:11: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:9: error: package net.minecraft.client.gui.screen.ingame does not exist
+  import net.minecraft.client.gui.screen.ingame.StatusEffectsDisplay;
+                                               ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:10: error: package net.minecraft.entity.effect does not exist
+  import net.minecraft.entity.effect.StatusEffectInstance;
+                                    ^
+  C:\Users\ender\Downloads\dozenium-template-1.21.11\src\client\java\name\modid\mixin\client\StatusEffectsDisplayMixin.java:11: error: package net.minecraft.text does not exist
+  import net.minecraft.text.Text;
+                           ^
+  100 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+BUILD FAILED in 4m 20s
+4 actionable tasks: 4 executed
