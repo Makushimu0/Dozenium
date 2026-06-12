@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import name.modid.util.Dozenal;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
-@Mixin(targets = "net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget$ServerEntry")
+@Mixin(targets = "net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$OnlineServerEntry")
 public class ServerEntryMixin {
 
     private static final Pattern DIGIT_PATTERN = Pattern.compile("\\d+");
@@ -21,11 +21,11 @@ public class ServerEntryMixin {
      * которая объявляется и сохраняется (STORE) в этом методе.
      */
     @ModifyVariable(
-        method = "render",
+        method = "renderContent",
         at = @At(value = "STORE"),
         ordinal = 0
     )
-    private Text convertServerPlayerCount(Text text) {
+    private Component convertServerPlayerCount(Component text) {
         if (text == null) return null;
 
         String rawString = text.getString();
@@ -53,6 +53,6 @@ public class ServerEntryMixin {
         matcher.appendTail(sb);
 
         // Возвращаем новый текст, сохраняя оригинальный стиль (цвет и т.д.)
-        return Text.literal(sb.toString()).setStyle(text.getStyle());
+        return Component.literal(sb.toString()).setStyle(text.getStyle());
     }
 }

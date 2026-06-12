@@ -13,32 +13,32 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.advancement.AdvancementWidget;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.advancements.AdvancementWidget;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.util.FormattedCharSequence;
 
 @Mixin(AdvancementWidget.class)
 public abstract class DozenalAdvancementWidgetMixin {
 
     @Shadow
-    protected abstract void drawText(DrawContext context, List<OrderedText> text, int x, int y, int color);
+    protected abstract void drawMultilineText(GuiGraphics context, List<FormattedCharSequence> text, int x, int y, int color);
 
     private static final Pattern DIGITS = Pattern.compile("\\d+");
 
     // Часть 1: Прогресс (5/10) - оставляем как было, тут все работает
     @ModifyVariable(
-        method = "drawTooltip",
+        method = "drawHover",
         at = @At("STORE"),
         ordinal = 0
     )
-    private Text dozenium$modifyProgressText(Text original) {
+    private Component dozenium$modifyProgressText(Component original) {
         if (original == null) return null;
         String raw = original.getString();
         String replaced = replaceNumbersInString(raw);
-        return Text.literal(replaced).setStyle(original.getStyle());
+        return Component.literal(replaced).setStyle(original.getStyle());
     }
 
     /**
@@ -46,16 +46,16 @@ public abstract class DozenalAdvancementWidgetMixin {
      * Исправлено: теперь мы сохраняем оригинальный цвет (фиолетовый/зеленый)
      */
     @Redirect(
-        method = "drawTooltip",
+        method = "drawHover",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/screen/advancement/AdvancementWidget;drawText(Lnet/minecraft/client/gui/DrawContext;Ljava/util/List;III)V"
+            target = "Lnet/minecraft/client/gui/screens/advancements/AdvancementWidget;drawMultilineText(Lnet/minecraft/client/gui/GuiGraphics;Ljava/util/List;III)V"
         )
     )
-    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, DrawContext context, List<OrderedText> lines, int x, int y, int color) {
-        List<OrderedText> newLines = new ArrayList<>();
+    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, GuiGraphics context, List<FormattedCharSequence> lines, int x, int y, int color) {
+        List<FormattedCharSequence> newLines = new ArrayList<>();
 
-        for (OrderedText line : lines) {
+        for (FormattedCharSequence line : lines) {
             StringBuilder sb = new StringBuilder();
             
             // Используем AtomicReference, чтобы вытащить стиль из лямбды (visitor)
@@ -85,13 +85,13 @@ public abstract class DozenalAdvancementWidgetMixin {
             String newContent = replaceNumbersInString(textContent);
 
             // Создаем новый текст и ПРИМЕНЯЕМ сохраненный стиль
-            MutableText newTextComp = Text.literal(newContent).setStyle(savedStyle.get());
+            MutableComponent newTextComp = Component.literal(newContent).setStyle(savedStyle.get());
 
-            newLines.add(newTextComp.asOrderedText());
+            newLines.add(newTextComp.getVisualOrderText());
         }
 
         // Рисуем обновленный список с правильными цветами
-        this.drawText(context, newLines, x, y, color);
+        this.drawMultilineText(context, newLines, x, y, color);
     }
 
     private String replaceNumbersInString(String input) {

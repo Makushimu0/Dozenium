@@ -13,15 +13,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import name.modid.util.Dozenal;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.PlainTextContent;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextContent;
-import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.PlainTextContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
 @Mixin(ItemStack.class)
 public class DozenalItemTooltipMixin {
@@ -30,13 +30,13 @@ public class DozenalItemTooltipMixin {
     @Unique
     private static final Pattern DECIMAL_PATTERN = Pattern.compile("(?<!\\d)[-+]?\\d+([,\\d]*\\d+)?(\\.\\d+)?(?!\\d)");
 
-    @Inject(method = "getTooltip", at = @At("RETURN"), cancellable = true)
-    private void injectTooltip(Item.TooltipContext context, @Nullable PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir) {
-        List<Text> original = cir.getReturnValue();
+    @Inject(method = "getTooltipLines", at = @At("RETURN"), cancellable = true)
+    private void injectTooltip(Item.TooltipContext context, @Nullable Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir) {
+        List<Component> original = cir.getReturnValue();
         if (original == null || original.isEmpty()) return;
 
         // Проходим по каждой строке тултипа и трансформируем её
-        List<Text> transformed = original.stream()
+        List<Component> transformed = original.stream()
                 .map(this::convertText)
                 .collect(Collectors.toList());
 
@@ -47,29 +47,29 @@ public class DozenalItemTooltipMixin {
      * Рекурсивно пересоздает Text объект с замененными числами, сохраняя стили.
      */
     @Unique
-    private Text convertText(Text text) {
-        TextContent content = text.getContent();
-        MutableText newText;
+    private Component convertText(Component text) {
+        ComponentContents content = text.getContents();
+        MutableComponent newText;
 
-        if (content instanceof TranslatableTextContent translatable) {
+        if (content instanceof TranslatableContents translatable) {
             // Если это переводимый текст (например, атрибуты)
             newText = handleTranslatable(translatable);
-        } else if (content instanceof PlainTextContent.Literal literal) {
+        } else if (content instanceof PlainTextContents.LiteralContents literal) {
             // Если это обычный текст (название, лор)
-            String raw = literal.string();
+            String raw = literal.text();
             // Тут контекст всегда обычный, так как проценты обычно идут через Translatable
             String converted = replaceNumbersInString(raw, false);
-            newText = Text.literal(converted);
+            newText = Component.literal(converted);
         } else {
             // Для остальных типов просто копируем контент без изменений (Keybinds, NBT и т.д.)
-            newText = MutableText.of(content);
+            newText = MutableComponent.create(content);
         }
 
         // 1. Копируем стиль исходного текста
         newText.setStyle(text.getStyle());
 
         // 2. Рекурсивно обрабатываем и добавляем дочерние элементы (siblings)
-        for (Text sibling : text.getSiblings()) {
+        for (Component sibling : text.getSiblings()) {
             newText.append(convertText(sibling));
         }
 
@@ -77,7 +77,7 @@ public class DozenalItemTooltipMixin {
     }
 
     @Unique
-    private MutableText handleTranslatable(TranslatableTextContent translatable) {
+    private MutableComponent handleTranslatable(TranslatableContents translatable) {
         String key = translatable.getKey();
         Object[] args = translatable.getArgs();
         Object[] newArgs = new Object[args.length];
@@ -94,7 +94,7 @@ public class DozenalItemTooltipMixin {
         for (int i = 0; i < args.length; i++) {
             Object arg = args[i];
 
-            if (arg instanceof Text textArg) {
+            if (arg instanceof Component textArg) {
                 // Если аргумент сам по себе текст - рекурсия
                 newArgs[i] = convertText(textArg);
             } else if (arg instanceof Number numberArg) {
@@ -126,7 +126,7 @@ public class DozenalItemTooltipMixin {
             }
         }
 
-        return Text.translatable(key, newArgs);
+        return Component.translatable(key, newArgs);
     }
 
     /**

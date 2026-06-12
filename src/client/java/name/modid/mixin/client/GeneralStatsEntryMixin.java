@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import name.modid.util.Dozenal;
 
-@Mixin(targets = "net.minecraft.client.gui.screen.StatsScreen$GeneralStatsListWidget$Entry")
+@Mixin(targets = "net.minecraft.client.gui.screens.achievement.StatsScreen$GeneralStatisticsList$Entry")
 public class GeneralStatsEntryMixin {
 
     // Паттерн: ищем цифры, точки или запятые в начале строки.
@@ -21,7 +21,7 @@ public class GeneralStatsEntryMixin {
      * Она уже содержит "1.50 km" или "10".
      */
     @ModifyVariable(
-        method = "render",
+        method = "renderContent",
         at = @At(value = "STORE"),
         ordinal = 0
     )

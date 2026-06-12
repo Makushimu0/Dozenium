@@ -14,14 +14,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.option.SimpleOption;
-import net.minecraft.text.Text;
+import net.minecraft.client.OptionInstance;
+import net.minecraft.network.chat.Component;
 
-@Mixin(SimpleOption.class)
+@Mixin(OptionInstance.class)
 public abstract class DozenalSimpleOptionMixin<T> {
 
     @Shadow @Final @Mutable
-    private Function<T, Text> textGetter;
+    private Function<T, Component> toString;
 
     /**
      * Уникальное поле, которое мы добавляем в класс SimpleOption.
@@ -42,10 +42,10 @@ public abstract class DozenalSimpleOptionMixin<T> {
         this.dozenium$isWrapped = true; // Ставим метку "Обернуто"
         // ----------------------------------------
 
-        Function<T, Text> originalGetter = this.textGetter;
+        Function<T, Component> originalGetter = this.toString;
 
-        this.textGetter = (value) -> {
-            Text originalText = originalGetter.apply(value);
+        this.toString = (value) -> {
+            Component originalText = originalGetter.apply(value);
             if (originalText == null) return null;
 
             String raw = originalText.getString();
@@ -67,7 +67,7 @@ public abstract class DozenalSimpleOptionMixin<T> {
      * Метод обработки строк с процентами (сохраняет структуру, меняет только числа)
      */
     @Unique
-    private Text processPercentString(String raw, Text originalText) {
+    private Component processPercentString(String raw, Component originalText) {
         // Используем простой паттерн только для целых чисел, так как знаем, что это проценты
         Matcher matcher = Pattern.compile("\\d+").matcher(raw);
         StringBuffer sb = new StringBuffer();
@@ -95,14 +95,14 @@ public abstract class DozenalSimpleOptionMixin<T> {
         if (!found) return originalText;
         
         matcher.appendTail(sb);
-        return Text.literal(sb.toString()).setStyle(originalText.getStyle());
+        return Component.literal(sb.toString()).setStyle(originalText.getStyle());
     }
 
     /**
      * Метод обработки обычных строк (ищет float и int)
      */
     @Unique
-    private Text processNormalString(String raw, Text originalText) {
+    private Component processNormalString(String raw, Component originalText) {
         Matcher matcher = NUMBERS.matcher(raw);
         if (!matcher.find()) return originalText;
 
@@ -137,6 +137,6 @@ public abstract class DozenalSimpleOptionMixin<T> {
             }
         }
         matcher.appendTail(sb);
-        return Text.literal(sb.toString()).setStyle(originalText.getStyle());
+        return Component.literal(sb.toString()).setStyle(originalText.getStyle());
     }
 }

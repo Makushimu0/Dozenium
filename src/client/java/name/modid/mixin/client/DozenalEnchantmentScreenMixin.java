@@ -5,9 +5,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 @Mixin(EnchantmentScreen.class)
 public abstract class DozenalEnchantmentScreenMixin {
@@ -19,10 +19,10 @@ public abstract class DozenalEnchantmentScreenMixin {
         method = "render",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/text/Text;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;"
+            target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
-    private MutableText dozenium$interceptEnchantTooltip(String key, Object[] args) {
+    private MutableComponent dozenium$interceptEnchantTooltip(String key, Object[] args) {
         // Нас интересует только текст требования уровня (например, "Required: 30")
         if ("container.enchant.level.requirement".equals(key)) {
             
@@ -38,10 +38,10 @@ public abstract class DozenalEnchantmentScreenMixin {
                 newArgs[0] = Dozenal.toDozenal(levelReq);
             }
 
-            return Text.translatable(key, newArgs);
+            return Component.translatable(key, newArgs);
         }
 
         // Все остальные тексты (названия чар, кол-во лазурита 1-3) пропускаем без изменений
-        return Text.translatable(key, args);
+        return Component.translatable(key, args);
     }
 }

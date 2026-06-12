@@ -8,38 +8,38 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.screen.DeathScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.DeathScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 @Mixin(DeathScreen.class)
 public abstract class DozenalDeathScreenMixin extends Screen {
 
-    @Shadow @Final private Text scoreText;
+    @Shadow @Final private Component deathScore;
 
-    protected DozenalDeathScreenMixin(Text title) {
+    protected DozenalDeathScreenMixin(Component title) {
         super(title);
     }
 
     @Redirect(
-        method = "drawTitles",
+        method = "visitText",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/client/gui/screen/DeathScreen;scoreText:Lnet/minecraft/text/Text;",
+            target = "Lnet/minecraft/client/gui/screens/DeathScreen;deathScore:Lnet/minecraft/network/chat/Component;",
             opcode = Opcodes.GETFIELD
         )
     )
-    private Text dozenium$interceptScoreTextRead(DeathScreen instance) {
-        if (this.client != null && this.client.player != null) {
+    private Component dozenium$interceptScoreTextRead(DeathScreen instance) {
+        if (this.minecraft != null && this.minecraft.player != null) {
             
             // 1. Получаем твои 12-ричные цифры
-            int score = this.client.player.getScore();
+            int score = this.minecraft.player.getScore();
             String dozenalScore = Dozenal.toDozenal(score);
 
             // 2. Берем полную строку, которая УЖЕ переведена игрой
             // Например: "Счет: 50" или "Score: 50"
-            String fullString = this.scoreText.getString();
+            String fullString = this.deathScore.getString();
 
             // 3. Ищем двоеточие
             String label = "Score"; // Запасной вариант, если двоеточия нет
@@ -53,11 +53,11 @@ public abstract class DozenalDeathScreenMixin extends Screen {
 
             // 4. Собираем конструктор LEGO заново:
             // [Слово из языка] + [: ] + [Твои цифры]
-            return Text.literal(label)
+            return Component.literal(label)
                     .append(": ")
-                    .append(Text.literal(dozenalScore).formatted(Formatting.YELLOW));
+                    .append(Component.literal(dozenalScore).withStyle(ChatFormatting.YELLOW));
         }
 
-        return this.scoreText;
+        return this.deathScore;
     }
 }

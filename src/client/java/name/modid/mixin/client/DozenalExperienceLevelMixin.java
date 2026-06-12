@@ -6,35 +6,35 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.CommonColors;
 
 @Environment(EnvType.CLIENT)
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class DozenalExperienceLevelMixin {
     @Redirect(
-      method = "renderMainHud",
+      method = "renderHotbarAndDecorations",
       at = @At(
         value = "INVOKE",
-        target = "Lnet/minecraft/client/gui/hud/bar/Bar;drawExperienceLevel(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/font/TextRenderer;I)V"
+        target = "Lnet/minecraft/client/gui/contextualbar/ContextualBarRenderer;renderExperienceLevel(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;I)V"
       )
     )
-    private void redirectDrawXpLevel(DrawContext context, TextRenderer textRenderer, int level) {
+    private void redirectDrawXpLevel(GuiGraphics context, Font textRenderer, int level) {
         String dozen = java.util.stream.IntStream.of(level)
             .mapToObj(name.modid.util.Dozenal::toDozenal)
             .findFirst()
             .orElse("0");
         // можно скопировать код оригинального drawExperienceLevel, но с dozen-строкой:
-        Text text = net.minecraft.text.Text.translatable("gui.experience.level", dozen);
-        int i = (context.getScaledWindowWidth() - textRenderer.getWidth(text)) / 2;
-        int j = context.getScaledWindowHeight() - 24 - 9 - 2;
-        context.drawText(textRenderer, text, i + 1, j, net.minecraft.util.Colors.BLACK, false);
-        context.drawText(textRenderer, text, i - 1, j, net.minecraft.util.Colors.BLACK, false);
-        context.drawText(textRenderer, text, i, j + 1, Colors.BLACK, false);
-        context.drawText(textRenderer, text, i, j - 1, Colors.BLACK, false);
-        context.drawText(textRenderer, text, i, j, -8323296, false);
+        Component text = net.minecraft.network.chat.Component.translatable("gui.experience.level", dozen);
+        int i = (context.guiWidth() - textRenderer.width(text)) / 2;
+        int j = context.guiHeight() - 24 - 9 - 2;
+        context.drawString(textRenderer, text, i + 1, j, net.minecraft.util.CommonColors.BLACK, false);
+        context.drawString(textRenderer, text, i - 1, j, net.minecraft.util.CommonColors.BLACK, false);
+        context.drawString(textRenderer, text, i, j + 1, CommonColors.BLACK, false);
+        context.drawString(textRenderer, text, i, j - 1, CommonColors.BLACK, false);
+        context.drawString(textRenderer, text, i, j, -8323296, false);
     }
 }

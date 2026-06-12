@@ -6,11 +6,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal; // Импорт твоего утилитного класса
-import net.minecraft.client.gui.screen.ingame.StatusEffectsDisplay;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
 
-@Mixin(StatusEffectsDisplay.class)
+@Mixin(EffectsInInventory.class)
 public abstract class StatusEffectsDisplayMixin {
 
     /**
@@ -18,17 +18,17 @@ public abstract class StatusEffectsDisplayMixin {
      * Вместо ванильного форматирования времени (MM:SS) мы используем твою 12-ричную систему.
      */
     @Redirect(
-        method = "drawStatusEffects",
+        method = "renderEffects",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/effect/StatusEffectUtil;getDurationText(Lnet/minecraft/entity/effect/StatusEffectInstance;FF)Lnet/minecraft/text/Text;"
+            target = "Lnet/minecraft/world/effect/MobEffectUtil;formatDuration(Lnet/minecraft/world/effect/MobEffectInstance;FF)Lnet/minecraft/network/chat/Component;"
         )
     )
 
-    private Text injectDozenalDuration(StatusEffectInstance instance, float multiplier, float tickRate) {
+    private Component injectDozenalDuration(MobEffectInstance instance, float multiplier, float tickRate) {
         // 1. Проверяем, не является ли эффект бесконечным (например, от маяка или в креативе)
-        if (instance.isInfinite()) {
-            return Text.translatable("effect.duration.infinite");
+        if (instance.isInfiniteDuration()) {
+            return Component.translatable("effect.duration.infinite");
         }
 
         // 2. Получаем длительность в тиках
@@ -49,7 +49,7 @@ public abstract class StatusEffectsDisplayMixin {
         }
 
         // 4. Возвращаем текстовый объект
-        return Text.of(dozenalString);
+        return Component.nullToEmpty(dozenalString);
     }
     @Unique
     private static String pad2(String s) {

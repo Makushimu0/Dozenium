@@ -5,11 +5,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.stat.Stat;
+import net.minecraft.stats.Stat;
 
 // Мы используем targets, чтобы "достать" глубоко спрятанный внутренний класс StatEntry
 // без использования Access Widener.
-@Mixin(targets = "net.minecraft.client.gui.screen.StatsScreen$ItemStatsListWidget$StatEntry")
+@Mixin(targets = "net.minecraft.client.gui.screens.achievement.StatsScreen$ItemStatisticsList$ItemRow")
 public class ItemStatEntryMixin {
 
     /**
@@ -17,10 +17,10 @@ public class ItemStatEntryMixin {
      * Это происходит внутри метода render(...).
      */
     @Redirect(
-        method = "render(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/stat/Stat;IIZ)V",
+        method = "renderStat(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/stats/Stat;IIZ)V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/stat/Stat;format(I)Ljava/lang/String;"
+            target = "Lnet/minecraft/stats/Stat;format(I)Ljava/lang/String;"
         )
     )
     private String changeToDuodecimal(Stat<?> instance, int value) {

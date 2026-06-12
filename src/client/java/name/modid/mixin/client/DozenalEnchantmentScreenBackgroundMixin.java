@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
+import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 
 @Mixin(EnchantmentScreen.class)
 public abstract class DozenalEnchantmentScreenBackgroundMixin {
@@ -16,7 +16,7 @@ public abstract class DozenalEnchantmentScreenBackgroundMixin {
      * В этом методе это как раз наша 'String string = o + ""'.
      */
     @ModifyVariable(
-        method = "drawBackground",
+        method = "renderBg",
         at = @At("STORE"),
         ordinal = 0
     )

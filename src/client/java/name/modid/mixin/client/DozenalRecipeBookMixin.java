@@ -5,11 +5,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookResults;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookPage;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
-@Mixin(RecipeBookResults.class)
+@Mixin(RecipeBookPage.class)
 public abstract class DozenalRecipeBookMixin {
 
     /**
@@ -17,13 +17,13 @@ public abstract class DozenalRecipeBookMixin {
      * method = "draw" - это имя в Yarn (development environment).
      */
     @Redirect(
-        method = "draw",
+        method = "render",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/text/Text;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;"
+            target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
-    private MutableText dozenium$interceptRecipePageText(String key, Object[] args) {
+    private MutableComponent dozenium$interceptRecipePageText(String key, Object[] args) {
         // Проверяем, что это именно тот текст (страница книги рецептов)
         if ("gui.recipebook.page".equals(key)) {
             
@@ -43,10 +43,10 @@ public abstract class DozenalRecipeBookMixin {
             }
 
             // Возвращаем текст с подмененными (строковыми) аргументами
-            return Text.translatable(key, newArgs);
+            return Component.translatable(key, newArgs);
         }
 
         // Для всех остальных текстов ничего не меняем
-        return Text.translatable(key, args);
+        return Component.translatable(key, args);
     }
 }

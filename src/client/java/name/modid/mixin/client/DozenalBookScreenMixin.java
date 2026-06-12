@@ -8,43 +8,43 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.font.DrawnTextConsumer;
-import net.minecraft.client.gui.screen.ingame.BookScreen;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.ActiveTextCollector;
+import net.minecraft.client.gui.screens.inventory.BookViewScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 
-@Mixin(BookScreen.class)
+@Mixin(BookViewScreen.class)
 public abstract class DozenalBookScreenMixin {
 
-    @Shadow private Text pageIndexText;
-    @Shadow private int pageIndex;
-    @Shadow protected abstract int getPageCount();
+    @Shadow private Component pageMsg;
+    @Shadow private int currentPage;
+    @Shadow protected abstract int getNumPages();
 
     @Inject(
-        method = "method_75835", 
+        method = "visitText", 
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/client/gui/screen/ingame/BookScreen;pageIndexText:Lnet/minecraft/text/Text;",
+            target = "Lnet/minecraft/client/gui/screens/inventory/BookViewScreen;pageMsg:Lnet/minecraft/network/chat/Component;",
             opcode = Opcodes.PUTFIELD,
             shift = At.Shift.AFTER
         )
     )
-    private void dozenium$replacePageText(DrawnTextConsumer drawer, boolean bl, CallbackInfo ci) {
+    private void dozenium$replacePageText(ActiveTextCollector drawer, boolean bl, CallbackInfo ci) {
         // 1. Получаем оригинальный стиль (цвет, шрифт и т.д.), который игра только что присвоила
-        Style originalStyle = this.pageIndexText.getStyle();
+        Style originalStyle = this.pageMsg.getStyle();
 
         // 2. Вычисляем наши 12-ричные значения
-        String dozenalCurrent = Dozenal.toDozenal(this.pageIndex + 1);
-        String dozenalTotal = Dozenal.toDozenal(this.getPageCount());
+        String dozenalCurrent = Dozenal.toDozenal(this.currentPage + 1);
+        String dozenalTotal = Dozenal.toDozenal(this.getNumPages());
         
         // 3. Создаем новый текст
-        MutableText newText = Text.translatable("book.pageIndicator", dozenalCurrent, dozenalTotal);
+        MutableComponent newText = Component.translatable("book.pageIndicator", dozenalCurrent, dozenalTotal);
         
         // 4. ВАЖНО: Применяем оригинальный стиль к нашему новому тексту
         newText.setStyle(originalStyle);
 
         // 5. Подменяем поле
-        this.pageIndexText = newText;
+        this.pageMsg = newText;
     }
 }

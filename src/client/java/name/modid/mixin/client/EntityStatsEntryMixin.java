@@ -5,10 +5,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
-@Mixin(targets = "net.minecraft.client.gui.screen.StatsScreen$EntityStatsListWidget$Entry")
+@Mixin(targets = "net.minecraft.client.gui.screens.achievement.StatsScreen$MobsStatisticsList$MobRow")
 public class EntityStatsEntryMixin {
 
     /**
@@ -21,10 +21,10 @@ public class EntityStatsEntryMixin {
         method = "<init>",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/text/Text;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;"
+            target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
-    private MutableText convertNumbersToDozenal(String key, Object[] args) {
+    private MutableComponent convertNumbersToDozenal(String key, Object[] args) {
         // Проверяем, что это нужные нам ключи статистики (чтобы не сломать другие тексты)
         if (key.startsWith("stat_type.minecraft.killed")) { // Ловит и "killed", и "killed_by", и ".none"
             
@@ -40,6 +40,6 @@ public class EntityStatsEntryMixin {
         }
 
         // Вызываем оригинальный метод, но уже с нашим подмененным массивом args
-        return Text.translatable(key, args);
+        return Component.translatable(key, args);
     }
 }

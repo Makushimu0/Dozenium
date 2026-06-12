@@ -5,9 +5,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.screen.ingame.AnvilScreen;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.inventory.AnvilScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 @Mixin(AnvilScreen.class)
 public abstract class DozenalAnvilScreenMixin {
@@ -17,13 +17,13 @@ public abstract class DozenalAnvilScreenMixin {
      * method = "drawForeground" - это стандартное имя метода отрисовки переднего плана в Yarn.
      */
     @Redirect(
-        method = "drawForeground",
+        method = "renderLabels",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/text/Text;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;"
+            target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
-    private MutableText dozenium$interceptAnvilCost(String key, Object[] args) {
+    private MutableComponent dozenium$interceptAnvilCost(String key, Object[] args) {
         // Проверяем, что это именно текст стоимости ремонта
         if ("container.repair.cost".equals(key)) {
             
@@ -41,10 +41,10 @@ public abstract class DozenalAnvilScreenMixin {
 
             // Возвращаем текст с новым аргументом.
             // Игра подставит нашу строку "10" (вместо числа 12) в шаблон перевода.
-            return Text.translatable(key, newArgs);
+            return Component.translatable(key, newArgs);
         }
 
         // Если вдруг там есть другие переводимые тексты, не трогаем их
-        return Text.translatable(key, args);
+        return Component.translatable(key, args);
     }
 }

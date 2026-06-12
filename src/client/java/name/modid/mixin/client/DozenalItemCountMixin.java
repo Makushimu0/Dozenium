@@ -5,13 +5,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphics;
 
-@Mixin(DrawContext.class)
+@Mixin(GuiGraphics.class)
 public class DozenalItemCountMixin {
    
     @Redirect(
-        method = "drawStackCount",
+        method = "renderItemCount",
         at = @At(
             value = "INVOKE",
             target = "Ljava/lang/String;valueOf(I)Ljava/lang/String;"

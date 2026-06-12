@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
 
-@Mixin(targets = "net.minecraft.client.gui.screen.world.WorldListWidget$WorldEntry")
+@Mixin(targets = "net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry")
 public class WorldEntryMixin {
 
     // Паттерн ищет любую последовательность цифр (\d+)

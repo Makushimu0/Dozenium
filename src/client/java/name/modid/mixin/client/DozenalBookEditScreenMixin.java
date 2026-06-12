@@ -10,16 +10,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.font.DrawnTextConsumer;
-import net.minecraft.client.gui.screen.ingame.BookEditScreen;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.ActiveTextCollector;
+import net.minecraft.client.gui.screens.inventory.BookEditScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 
 @Mixin(BookEditScreen.class)
 public abstract class DozenalBookEditScreenMixin {
 
-    @Shadow private Text pageIndicatorText;
+    @Shadow private Component numberOfPages;
     @Shadow private int currentPage;
     @Shadow @Final private List<String> pages; // Список страниц книги
 
@@ -28,14 +28,14 @@ public abstract class DozenalBookEditScreenMixin {
      * Мы обновляем текст прямо перед тем, как игра попытается его нарисовать.
      */
     @Inject(
-        method = "method_75830", // Ваше имя метода
+        method = "visitText", // Ваше имя метода
         at = @At("HEAD")
     )
-    private void dozenium$updatePageIndicatorEdit(DrawnTextConsumer drawnTextConsumer, CallbackInfo ci) {
+    private void dozenium$updatePageIndicatorEdit(ActiveTextCollector drawnTextConsumer, CallbackInfo ci) {
         // 1. Сохраняем стиль текущего текста (чтобы не потерять цвет/шрифт)
         Style originalStyle = Style.EMPTY;
-        if (this.pageIndicatorText != null) {
-            originalStyle = this.pageIndicatorText.getStyle();
+        if (this.numberOfPages != null) {
+            originalStyle = this.numberOfPages.getStyle();
         }
 
         // 2. Считаем количество страниц
@@ -48,13 +48,13 @@ public abstract class DozenalBookEditScreenMixin {
         String dozenalTotal = Dozenal.toDozenal(totalPages);
 
         // 4. Создаем новый текст
-        MutableText newText = Text.translatable("book.pageIndicator", dozenalCurrent, dozenalTotal);
+        MutableComponent newText = Component.translatable("book.pageIndicator", dozenalCurrent, dozenalTotal);
 
         // 5. Возвращаем оригинальный стиль
         newText.setStyle(originalStyle);
 
         // 6. Подменяем поле. Теперь, когда оригинальный код продолжит выполнение,
         // он нарисует уже наш обновленный текст.
-        this.pageIndicatorText = newText;
+        this.numberOfPages = newText;
     }
 }
