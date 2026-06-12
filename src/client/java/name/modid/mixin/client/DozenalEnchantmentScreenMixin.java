@@ -13,10 +13,11 @@ import net.minecraft.network.chat.MutableComponent;
 public abstract class DozenalEnchantmentScreenMixin {
 
     /**
-     * Перехватываем создание переводимого текста внутри метода render (который рисует тултипы).
+     * Перехватываем создание переводимого текста внутри метода extractRenderState.
      */
+    @SuppressWarnings("null")
     @Redirect(
-        method = "render",
+        method = "extractRenderState",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"

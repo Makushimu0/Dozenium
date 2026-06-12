@@ -13,16 +13,17 @@ import net.minecraft.network.chat.MutableComponent;
 public abstract class DozenalRecipeBookMixin {
 
     /**
-     * Перехватываем создание текста "gui.recipebook.page" внутри метода draw.
-     * method = "draw" - это имя в Yarn (development environment).
+     * Перехватываем создание текста "gui.recipebook.page" внутри метода extractRenderState.
+     * method = "extractRenderState" - актуальное имя в Yarn для Minecraft 26.1.
      */
     @Redirect(
-        method = "render",
+        method = "extractRenderState",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
+    @SuppressWarnings("null")
     private MutableComponent dozenium$interceptRecipePageText(String key, Object[] args) {
         // Проверяем, что это именно тот текст (страница книги рецептов)
         if ("gui.recipebook.page".equals(key)) {
@@ -43,10 +44,10 @@ public abstract class DozenalRecipeBookMixin {
             }
 
             // Возвращаем текст с подмененными (строковыми) аргументами
-            return Component.translatable(key, newArgs);
+            return Component.translatable(key != null ? key : "", newArgs);
         }
 
         // Для всех остальных текстов ничего не меняем
-        return Component.translatable(key, args);
+        return Component.translatable(key != null ? key : "", args);
     }
 }

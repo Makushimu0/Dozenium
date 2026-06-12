@@ -2,10 +2,12 @@ package name.modid.mixin.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference; // Нужен для передачи переменной из лямбды
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import name.modid.util.Dozenal;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.advancements.AdvancementWidget;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -24,13 +26,13 @@ import net.minecraft.util.FormattedCharSequence;
 public abstract class DozenalAdvancementWidgetMixin {
 
     @Shadow
-    protected abstract void drawMultilineText(GuiGraphics context, List<FormattedCharSequence> text, int x, int y, int color);
+    protected abstract void extractMultilineText(GuiGraphicsExtractor context, List<FormattedCharSequence> text, int x, int y, int color);
 
     private static final Pattern DIGITS = Pattern.compile("\\d+");
 
-    // Часть 1: Прогресс (5/10) - оставляем как было, тут все работает
+    // Часть 1: Прогресс (5/10) - теперь перехватываем правильный метод extractHover для Minecraft 26.1
     @ModifyVariable(
-        method = "drawHover",
+        method = "extractHover",
         at = @At("STORE"),
         ordinal = 0
     )
@@ -38,7 +40,7 @@ public abstract class DozenalAdvancementWidgetMixin {
         if (original == null) return null;
         String raw = original.getString();
         String replaced = replaceNumbersInString(raw);
-        return Component.literal(replaced).setStyle(original.getStyle());
+        return Component.literal(Objects.requireNonNull(replaced)).setStyle(original.getStyle());
     }
 
     /**
@@ -46,20 +48,22 @@ public abstract class DozenalAdvancementWidgetMixin {
      * Исправлено: теперь мы сохраняем оригинальный цвет (фиолетовый/зеленый)
      */
     @Redirect(
-        method = "drawHover",
+        method = "extractHover",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/screens/advancements/AdvancementWidget;drawMultilineText(Lnet/minecraft/client/gui/GuiGraphics;Ljava/util/List;III)V"
+            target = "Lnet/minecraft/client/gui/screens/advancements/AdvancementWidget;extractMultilineText(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Ljava/util/List;III)V"
         )
     )
-    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, GuiGraphics context, List<FormattedCharSequence> lines, int x, int y, int color) {
+    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, GuiGraphicsExtractor context, List<FormattedCharSequence> lines, int x, int y, int color) {
         List<FormattedCharSequence> newLines = new ArrayList<>();
 
         for (FormattedCharSequence line : lines) {
             StringBuilder sb = new StringBuilder();
             
             // Используем AtomicReference, чтобы вытащить стиль из лямбды (visitor)
-            AtomicReference<Style> savedStyle = new AtomicReference<>(Style.EMPTY);
+            // Change your line to look exactly like this:
+            AtomicReference<@NonNull Style> savedStyle = new AtomicReference<>(Style.EMPTY);
+
 
             // Проходимся по строке.
             // OrderedText работает так: он перебирает символы по одному.
@@ -85,13 +89,14 @@ public abstract class DozenalAdvancementWidgetMixin {
             String newContent = replaceNumbersInString(textContent);
 
             // Создаем новый текст и ПРИМЕНЯЕМ сохраненный стиль
-            MutableComponent newTextComp = Component.literal(newContent).setStyle(savedStyle.get());
+            @NonNull Style finalStyle = Objects.requireNonNull(savedStyle.get());
+            MutableComponent newTextComp = Component.literal(Objects.requireNonNull(newContent)).setStyle(finalStyle);
 
             newLines.add(newTextComp.getVisualOrderText());
         }
 
         // Рисуем обновленный список с правильными цветами
-        this.drawMultilineText(context, newLines, x, y, color);
+        this.extractMultilineText(context, newLines, x, y, color);
     }
 
     private String replaceNumbersInString(String input) {

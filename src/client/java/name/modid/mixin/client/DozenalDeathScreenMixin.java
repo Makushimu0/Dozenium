@@ -1,5 +1,7 @@
 package name.modid.mixin.client;
 
+import java.util.Objects;
+
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +23,8 @@ public abstract class DozenalDeathScreenMixin extends Screen {
     protected DozenalDeathScreenMixin(Component title) {
         super(title);
     }
-
+    
+    @SuppressWarnings("null")
     @Redirect(
         method = "visitText",
         at = @At(
@@ -53,7 +56,7 @@ public abstract class DozenalDeathScreenMixin extends Screen {
 
             // 4. Собираем конструктор LEGO заново:
             // [Слово из языка] + [: ] + [Твои цифры]
-            return Component.literal(label)
+            return Component.literal(Objects.requireNonNullElse(label, "Score"))
                     .append(": ")
                     .append(Component.literal(dozenalScore).withStyle(ChatFormatting.YELLOW));
         }

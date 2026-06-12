@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+import java.util.Objects;
 import name.modid.util.Dozenal;
 import net.minecraft.network.chat.Component;
 
@@ -53,6 +54,7 @@ public class ServerEntryMixin {
         matcher.appendTail(sb);
 
         // Возвращаем новый текст, сохраняя оригинальный стиль (цвет и т.д.)
-        return Component.literal(sb.toString()).setStyle(text.getStyle());
+        String convertedString = sb.toString();
+        return Component.literal(Objects.requireNonNull(convertedString)).setStyle(text.getStyle());
     }
 }

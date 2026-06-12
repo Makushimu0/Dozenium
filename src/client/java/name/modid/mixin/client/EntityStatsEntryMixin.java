@@ -24,6 +24,7 @@ public class EntityStatsEntryMixin {
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
+    @SuppressWarnings("null")
     private MutableComponent convertNumbersToDozenal(String key, Object[] args) {
         // Проверяем, что это нужные нам ключи статистики (чтобы не сломать другие тексты)
         if (key.startsWith("stat_type.minecraft.killed")) { // Ловит и "killed", и "killed_by", и ".none"

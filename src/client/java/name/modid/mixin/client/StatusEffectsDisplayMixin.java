@@ -18,7 +18,7 @@ public abstract class StatusEffectsDisplayMixin {
      * Вместо ванильного форматирования времени (MM:SS) мы используем твою 12-ричную систему.
      */
     @Redirect(
-        method = "renderEffects",
+        method = "extractEffects",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/effect/MobEffectUtil;formatDuration(Lnet/minecraft/world/effect/MobEffectInstance;FF)Lnet/minecraft/network/chat/Component;"

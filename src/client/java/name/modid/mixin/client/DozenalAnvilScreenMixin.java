@@ -1,5 +1,7 @@
 package name.modid.mixin.client;
 
+import java.util.Objects;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -13,11 +15,12 @@ import net.minecraft.network.chat.MutableComponent;
 public abstract class DozenalAnvilScreenMixin {
 
     /**
-     * Перехватываем создание текста "container.repair.cost" (Стоимость зачарования).
-     * method = "drawForeground" - это стандартное имя метода отрисовки переднего плана в Yarn.
+     * Перехватываем создание текста "container.repair.cost" (Стоимость ремонта).
+     * method = "extractLabels" - имя метода отрисовки текста переднего плана в Minecraft 26.1.
      */
+    @SuppressWarnings("null") // Отключает предупреждения JSpecify для null-безопасности массивов
     @Redirect(
-        method = "renderLabels",
+        method = "extractLabels",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
@@ -36,15 +39,15 @@ public abstract class DozenalAnvilScreenMixin {
                 int cost = ((Number) newArgs[0]).intValue();
                 
                 // Превращаем число в 12-ричную строку
-                newArgs[0] = Dozenal.toDozenal(cost);
+                newArgs[0] = Objects.requireNonNullElse(Dozenal.toDozenal(cost), "");
             }
 
             // Возвращаем текст с новым аргументом.
             // Игра подставит нашу строку "10" (вместо числа 12) в шаблон перевода.
-            return Component.translatable(key, newArgs);
+            return Component.translatable(Objects.requireNonNullElse(key, ""), newArgs);
         }
 
         // Если вдруг там есть другие переводимые тексты, не трогаем их
-        return Component.translatable(key, args);
+        return Component.translatable(Objects.requireNonNullElse(key, ""), args);
     }
 }

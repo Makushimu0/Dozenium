@@ -1,6 +1,7 @@
 package name.modid.mixin.client;
 
 import java.util.function.Function;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,7 +96,7 @@ public abstract class DozenalSimpleOptionMixin<T> {
         if (!found) return originalText;
         
         matcher.appendTail(sb);
-        return Component.literal(sb.toString()).setStyle(originalText.getStyle());
+        return Component.literal(Objects.requireNonNull(sb.toString())).setStyle(originalText.getStyle());
     }
 
     /**
@@ -137,6 +138,6 @@ public abstract class DozenalSimpleOptionMixin<T> {
             }
         }
         matcher.appendTail(sb);
-        return Component.literal(sb.toString()).setStyle(originalText.getStyle());
+        return Component.literal(Objects.requireNonNull(sb.toString())).setStyle(originalText.getStyle());
     }
 }

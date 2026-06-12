@@ -1,6 +1,7 @@
 package name.modid.mixin.client;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -56,10 +57,11 @@ public class DozenalItemTooltipMixin {
             newText = handleTranslatable(translatable);
         } else if (content instanceof PlainTextContents.LiteralContents literal) {
             // Если это обычный текст (название, лор)
-            String raw = literal.text();
-            // Тут контекст всегда обычный, так как проценты обычно идут через Translatable
-            String converted = replaceNumbersInString(raw, false);
-            newText = Component.literal(converted);
+            String raw = Objects.requireNonNullElse(literal.text(), "");
+
+            // Получаем результат как строку без небезопасного приведения типов
+            String converted = String.valueOf(replaceNumbersInString(raw, false));
+            newText = Component.literal(converted == null ? "" : converted);
         } else {
             // Для остальных типов просто копируем контент без изменений (Keybinds, NBT и т.д.)
             newText = MutableComponent.create(content);
@@ -70,7 +72,8 @@ public class DozenalItemTooltipMixin {
 
         // 2. Рекурсивно обрабатываем и добавляем дочерние элементы (siblings)
         for (Component sibling : text.getSiblings()) {
-            newText.append(convertText(sibling));
+            Component convertedSibling = convertText(sibling);
+            newText.append(convertedSibling != null ? convertedSibling : Component.empty());
         }
 
         return newText;

@@ -11,12 +11,12 @@ import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 public abstract class DozenalEnchantmentScreenBackgroundMixin {
 
     /**
-     * Изменяем локальную переменную типа String внутри метода drawBackground.
+     * Изменяем локальную переменную типа String внутри метода extractBackground.
      * Мы ищем первую попавшуюся переменную String (ordinal = 0), которая сохраняется (STORE).
      * В этом методе это как раз наша 'String string = o + ""'.
      */
     @ModifyVariable(
-        method = "renderBg",
+        method = "extractBackground",
         at = @At("STORE"),
         ordinal = 0
     )
