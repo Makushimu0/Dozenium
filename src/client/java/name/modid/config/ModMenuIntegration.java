@@ -13,30 +13,21 @@ public class ModMenuIntegration implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parentScreen -> YetAnotherConfigLib.create(DozeniumConfig.HANDLER, (defaults, config, builder) -> builder
                 .title(Component.literal("Dozenium Config"))
-                
-                // 🌟 THE CORRECT WAY TO SAVE AND UPDATE IN YACL v3:
                 .save(() -> {
-                    DozeniumConfig.HANDLER.save();     // Save the data to dozenium.json
-                    Dozenal.updateDigitsFromConfig();  // Tell your mod to update characters instantly!
+                    DozeniumConfig.HANDLER.save();
+                    Dozenal.updateDigitsFromConfig();
                 })
-                
                 .category(ConfigCategory.createBuilder()
                         .name(Component.literal("General Settings"))
                         
-                        // 1. Dec Symbol Property Field
                         .option(Option.<String>createBuilder()
-                                .name(Component.literal("Dec"))
-                                .description(OptionDescription.of(Component.literal("Custom character for DEC (Default: X)")))
-                                // Triggers real-time value assignment
+                                .name(Component.literal("Dec Symbol"))
                                 .binding(defaults.decSymbol, () -> config.decSymbol, newValue -> config.decSymbol = newValue)
                                 .controller(StringControllerBuilder::create)
                                 .build())
                         
-                        // 2. El Symbol Property Field
                         .option(Option.<String>createBuilder()
-                                .name(Component.literal("El"))
-                                .description(OptionDescription.of(Component.literal("Custom character for EL (Default: E)")))
-                                // Triggers real-time value assignment
+                                .name(Component.literal("El Symbol"))
                                 .binding(defaults.elSymbol, () -> config.elSymbol, newValue -> config.elSymbol = newValue)
                                 .controller(StringControllerBuilder::create)
                                 .build())

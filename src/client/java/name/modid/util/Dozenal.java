@@ -12,9 +12,8 @@ public final class Dozenal {
 
         public static void updateDigitsFromConfig() {
         // Fetch the saved user settings
-        DozeniumConfig config = DozeniumConfig.HANDLER.instance();
-        
-        // Grab the first character of whatever the user typed (fallback to default if empty)
+        DozeniumConfig.Data config = DozeniumConfig.HANDLER.instance();
+
         char dec = (config.decSymbol == null || config.decSymbol.isEmpty()) ? 'X' : config.decSymbol.charAt(0);
         char el = (config.elSymbol == null || config.elSymbol.isEmpty()) ? 'E' : config.elSymbol.charAt(0);
         

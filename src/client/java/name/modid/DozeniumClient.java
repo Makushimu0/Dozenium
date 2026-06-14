@@ -8,6 +8,7 @@ public class DozeniumClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         DozeniumConfig.HANDLER.load();
+        DozeniumConfig.HANDLER.save();
         Dozenal.updateDigitsFromConfig(); 
     }
 }
