@@ -1,10 +1,13 @@
 package name.modid;
 
+import name.modid.config.DozeniumConfig;
+import name.modid.util.Dozenal;
 import net.fabricmc.api.ClientModInitializer;
 
 public class DozeniumClient implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
-	}
+    @Override
+    public void onInitializeClient() {
+        DozeniumConfig.HANDLER.load();
+        Dozenal.updateDigitsFromConfig(); 
+    }
 }

@@ -16,6 +16,9 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	maven { url 'https://isxander.dev' }
+	maven { url "https://maven.terraformersmc.com/releases/" }
+	maven { url "https://maven.quiltmc.org/repository/release/" } 
 }
 
 loom {
@@ -37,6 +40,15 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Dependencies for my mod
+	// Temporary: comment out unavailable dependency to allow project configuration
+	implementation "dev.isxander:yet-another-config-lib:3.9.4+26.1-fabric"
+	include "dev.isxander:yet-another-config-lib:3.9.4+26.1-fabric"
+
+	compileOnly("com.terraformersmc:modmenu:${project.modmenu_version}"){
+		transitive = false
+	}
 	
 }
 

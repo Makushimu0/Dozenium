@@ -1,12 +1,28 @@
 package name.modid.util;
 
+import name.modid.config.DozeniumConfig;
+
 public final class Dozenal {
 
     private Dozenal() {}
 
-    private static final char[] DOZENAL_DIGITS = {
+    private static char[] DOZENAL_DIGITS = {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'E'
     };
+
+        public static void updateDigitsFromConfig() {
+        // Fetch the saved user settings
+        DozeniumConfig config = DozeniumConfig.HANDLER.instance();
+        
+        // Grab the first character of whatever the user typed (fallback to default if empty)
+        char dec = (config.decSymbol == null || config.decSymbol.isEmpty()) ? 'X' : config.decSymbol.charAt(0);
+        char el = (config.elSymbol == null || config.elSymbol.isEmpty()) ? 'E' : config.elSymbol.charAt(0);
+        
+        // Update the last two indexes of your array
+        DOZENAL_DIGITS[10] = dec;
+        DOZENAL_DIGITS[11] = el;
+    }
+
     public static String toDozenal(int value) {
         if (value == 0) return "0";
         StringBuilder sb = new StringBuilder();
