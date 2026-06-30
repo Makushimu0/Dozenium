@@ -4,13 +4,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 @Mixin(EnchantmentScreen.class)
-public abstract class DozenalEnchantmentScreenMixin {
+public abstract class SezimalEnchantmentScreenMixin {
 
     /**
      * Перехватываем создание переводимого текста внутри метода extractRenderState.
@@ -23,7 +23,7 @@ public abstract class DozenalEnchantmentScreenMixin {
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
-    private MutableComponent dozenium$interceptEnchantTooltip(String key, Object[] args) {
+    private MutableComponent senarium$interceptEnchantTooltip(String key, Object[] args) {
         // Нас интересует только текст требования уровня (например, "Required: 30")
         if ("container.enchant.level.requirement".equals(key)) {
             
@@ -36,7 +36,7 @@ public abstract class DozenalEnchantmentScreenMixin {
                 int levelReq = ((Number) newArgs[0]).intValue();
                 
                 // Переводим 30 -> 26 (в 12-ричной)
-                newArgs[0] = Dozenal.toDozenal(levelReq);
+                newArgs[0] = Sezimal.toSezimal(levelReq);
             }
 
             return Component.translatable(key, newArgs);

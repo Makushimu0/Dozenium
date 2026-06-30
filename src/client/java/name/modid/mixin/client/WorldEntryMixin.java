@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 
 @Mixin(targets = "net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry")
 public class WorldEntryMixin {
@@ -43,7 +43,7 @@ public class WorldEntryMixin {
                 int value = Integer.parseInt(matcher.group());
                 
                 // Переводим его в 12-ричную (например, "26")
-                String dozenalValue = Dozenal.toDozenal(value);
+                String dozenalValue = Sezimal.toSezimal(value);
                 if (dozenalValue.length() < 2) {
                     dozenalValue = "0" + dozenalValue;
                 }

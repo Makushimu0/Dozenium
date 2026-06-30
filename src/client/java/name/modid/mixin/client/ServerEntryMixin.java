@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.Objects;
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.network.chat.Component;
 
 @Mixin(targets = "net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$OnlineServerEntry")
@@ -45,7 +45,7 @@ public class ServerEntryMixin {
                 // Извлекаем число
                 int value = Integer.parseInt(matcher.group());
                 // Конвертируем
-                matcher.appendReplacement(sb, Dozenal.toDozenal(value));
+                matcher.appendReplacement(sb, Sezimal.toSezimal(value));
             } catch (NumberFormatException e) {
                 // На случай очень больших чисел, которые не влезут в int
                 matcher.appendReplacement(sb, matcher.group());

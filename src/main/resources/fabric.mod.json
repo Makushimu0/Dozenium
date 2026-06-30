@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "dozenium",
+	"id": "senarium",
 	"version": "${version}",
-	"name": "Dozenium",
-	"description": "Dose of base-dozen",
+	"name": "Senarium",
+	"description": "I cast all numbers are now sezimal!",
 	"authors": [
 		"Makushimu"
 	],
@@ -12,20 +12,20 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/dozenium/icon.png",
+	"icon": "assets/senarium/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"name.modid.Dozenium"
+			"name.modid.Senarium"
 		],
 		"client": [
-			"name.modid.DozeniumClient"
+			"name.modid.SenariumClient"
 		]
 	},
 	"mixins": [
-		"dozenium.mixins.json",
+		"senarium.mixins.json",
 		{
-			"config": "dozenium.client.mixins.json",
+			"config": "senarium.client.mixins.json",
 			"environment": "client"
 		}
 	],

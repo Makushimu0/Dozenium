@@ -4,7 +4,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.stats.Stat;
 
 // Мы используем targets, чтобы "достать" глубоко спрятанный внутренний класс StatEntry
@@ -30,6 +30,6 @@ public class ItemStatEntryMixin {
         }
         
         // Превращаем число в 12-ричную строку (0-9, a, b) и делаем буквы заглавными (0-9, A, B)
-        return Dozenal.toDozenal(value);
+        return Sezimal.toSezimal(value);
     }
 }

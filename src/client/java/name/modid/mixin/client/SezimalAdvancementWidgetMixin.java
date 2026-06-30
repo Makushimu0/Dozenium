@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.advancements.AdvancementWidget;
 import net.minecraft.network.chat.Component;
@@ -23,7 +23,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
 
 @Mixin(AdvancementWidget.class)
-public abstract class DozenalAdvancementWidgetMixin {
+public abstract class SezimalAdvancementWidgetMixin {
 
     @Shadow
     protected abstract void extractMultilineText(GuiGraphicsExtractor context, List<FormattedCharSequence> text, int x, int y, int color);
@@ -36,7 +36,7 @@ public abstract class DozenalAdvancementWidgetMixin {
         at = @At("STORE"),
         ordinal = 0
     )
-    private Component dozenium$modifyProgressText(Component original) {
+    private Component senarium$modifyProgressText(Component original) {
         if (original == null) return null;
         String raw = original.getString();
         String replaced = replaceNumbersInString(raw);
@@ -54,7 +54,7 @@ public abstract class DozenalAdvancementWidgetMixin {
             target = "Lnet/minecraft/client/gui/screens/advancements/AdvancementWidget;extractMultilineText(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Ljava/util/List;III)V"
         )
     )
-    private void dozenium$redirectDescriptionDraw(AdvancementWidget instance, GuiGraphicsExtractor context, List<FormattedCharSequence> lines, int x, int y, int color) {
+    private void senarium$redirectDescriptionDraw(AdvancementWidget instance, GuiGraphicsExtractor context, List<FormattedCharSequence> lines, int x, int y, int color) {
         List<FormattedCharSequence> newLines = new ArrayList<>();
 
         for (FormattedCharSequence line : lines) {
@@ -105,7 +105,7 @@ public abstract class DozenalAdvancementWidgetMixin {
         while (m.find()) {
             try {
                 int value = Integer.parseInt(m.group());
-                m.appendReplacement(sb, Dozenal.toDozenal(value));
+                m.appendReplacement(sb, Sezimal.toSezimal(value));
             } catch (NumberFormatException e) {
                 m.appendReplacement(sb, m.group());
             }

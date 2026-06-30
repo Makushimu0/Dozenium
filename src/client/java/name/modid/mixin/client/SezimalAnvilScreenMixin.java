@@ -6,13 +6,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 @Mixin(AnvilScreen.class)
-public abstract class DozenalAnvilScreenMixin {
+public abstract class SezimalAnvilScreenMixin {
 
     /**
      * Перехватываем создание текста "container.repair.cost" (Стоимость ремонта).
@@ -26,7 +26,7 @@ public abstract class DozenalAnvilScreenMixin {
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"
         )
     )
-    private MutableComponent dozenium$interceptAnvilCost(String key, Object[] args) {
+    private MutableComponent senarium$interceptAnvilCost(String key, Object[] args) {
         // Проверяем, что это именно текст стоимости ремонта
         if ("container.repair.cost".equals(key)) {
             
@@ -39,7 +39,7 @@ public abstract class DozenalAnvilScreenMixin {
                 int cost = ((Number) newArgs[0]).intValue();
                 
                 // Превращаем число в 12-ричную строку
-                newArgs[0] = Objects.requireNonNullElse(Dozenal.toDozenal(cost), "");
+                newArgs[0] = Objects.requireNonNullElse(Sezimal.toSezimal(cost), "");
             }
 
             // Возвращаем текст с новым аргументом.

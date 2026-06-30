@@ -4,7 +4,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -35,7 +35,7 @@ public class EntityStatsEntryMixin {
                 if (args[i] instanceof Integer value) {
                     // Заменяем число (int) на нашу строку (String) в 12-ричной системе
                     // Java позволяет класть String в массив Object[], так что всё легально.
-                    args[i] = Dozenal.toDozenal(value);
+                    args[i] = Sezimal.toSezimal(value);
                 }
             }
         }

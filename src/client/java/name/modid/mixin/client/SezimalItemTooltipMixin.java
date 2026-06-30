@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
@@ -25,7 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
 @Mixin(ItemStack.class)
-public class DozenalItemTooltipMixin {
+public class SezimalItemTooltipMixin {
 
     // Паттерн для поиска десятичных чисел в строках (поддерживает знаки и дроби)
     @Unique
@@ -106,7 +106,7 @@ public class DozenalItemTooltipMixin {
                 if (isAttribute && i == 0) { // Обычно значение атрибута - это 0-й аргумент
                     newArgs[i] = convertAttributeValue(val, isPercentAttribute);
                 } else {
-                    newArgs[i] = Dozenal.toDozenal((int) Math.round(val)); // Дефолтная конвертация
+                    newArgs[i] = Sezimal.toSezimal((int) Math.round(val)); // Дефолтная конвертация
                 }
             } else if (arg instanceof String stringArg) {
                 // Если аргумент строка (ванилла часто форматирует числа в строки заранее)
@@ -142,11 +142,11 @@ public class DozenalItemTooltipMixin {
             // ВАЖНО: Ванилла передает сюда уже умноженное на 100 число?
             // Обычно для attribute.modifier.plus.1 передается значение типа "20" (строка) для +20%.
             // Значит val уже 20.0. Используем toDozenalPercent для целых процентов.
-            return Dozenal.toDozenalPercent((int) Math.round(val));
+            return Sezimal.toSezimalPercent((int) Math.round(val));
         } else {
             // Обычное число (урон, броня)
             // Используем Float версию для точности (например +1.5 урона)
-            return Dozenal.toFloatDozenal((float) val);
+            return Sezimal.toFloatSezimal((float) val);
         }
     }
 
@@ -173,15 +173,15 @@ public class DozenalItemTooltipMixin {
                 
                 String replacement;
                 if (forcePercentContext) {
-                    replacement = Dozenal.toDozenalPercent((int) Math.round(val));
+                    replacement = Sezimal.toSezimalPercent((int) Math.round(val));
                 } else {
                     if (val == Math.floor(val) && !Double.isInfinite(val)) {
-                        replacement = Dozenal.toDozenal((int) val);
+                        replacement = Sezimal.toSezimal((int) val);
                         if (isTimeContext && replacement.length() < 2) {
                             replacement = "0" + replacement;
                         }
                     } else {
-                        replacement = Dozenal.toFloatDozenal((float) val);
+                        replacement = Sezimal.toFloatSezimal((float) val);
                     }
                 }
                 m.appendReplacement(sb, Matcher.quoteReplacement(replacement));

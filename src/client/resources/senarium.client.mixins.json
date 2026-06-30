@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "minVersion": "0.8.0",
+  "package": "name.modid.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SezimalItemCountMixin",
+    "SezimalExperienceLevelMixin",
+    "SezimalItemTooltipMixin",
+    "StatusEffectsDisplayMixin",
+    "SezimalBookScreenMixin",
+    "SezimalBookEditScreenMixin",
+    "SezimalRecipeBookMixin",
+    "SezimalAnvilScreenMixin",
+    "SezimalEnchantmentScreenMixin",
+    "SezimalEnchantmentScreenBackgroundMixin",
+    "SezimalDeathScreenMixin",
+    "SezimalAdvancementWidgetMixin",
+    "SezimalSimpleOptionMixin",
+    "GeneralStatsEntryMixin",
+    "ItemStatEntryMixin",
+    "EntityStatsEntryMixin",
+    "WorldEntryMixin",
+    "ServerEntryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

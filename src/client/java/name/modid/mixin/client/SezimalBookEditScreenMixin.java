@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.gui.ActiveTextCollector;
 import net.minecraft.client.gui.screens.inventory.BookEditScreen;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
 @Mixin(BookEditScreen.class)
-public abstract class DozenalBookEditScreenMixin {
+public abstract class SezimalBookEditScreenMixin {
 
     @Shadow private Component numberOfPages;
     @Shadow private int currentPage;
@@ -31,7 +31,7 @@ public abstract class DozenalBookEditScreenMixin {
         method = "visitText", // Ваше имя метода
         at = @At("HEAD")
     )
-    private void dozenium$updatePageIndicatorEdit(ActiveTextCollector drawnTextConsumer, CallbackInfo ci) {
+    private void senarium$updatePageIndicatorEdit(ActiveTextCollector drawnTextConsumer, CallbackInfo ci) {
         // 1. Сохраняем стиль текущего текста (чтобы не потерять цвет/шрифт)
         Style originalStyle = Style.EMPTY;
         if (this.numberOfPages != null) {
@@ -44,8 +44,8 @@ public abstract class DozenalBookEditScreenMixin {
         int totalPages = this.pages.size();
         
         // 3. Конвертируем в 12-ричную систему
-        String dozenalCurrent = Dozenal.toDozenal(this.currentPage + 1);
-        String dozenalTotal = Dozenal.toDozenal(totalPages);
+        String dozenalCurrent = Sezimal.toSezimal(this.currentPage + 1);
+        String dozenalTotal = Sezimal.toSezimal(totalPages);
 
         // 4. Создаем новый текст
         MutableComponent newText = Component.translatable("book.pageIndicator", dozenalCurrent, dozenalTotal);

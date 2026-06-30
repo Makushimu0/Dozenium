@@ -4,13 +4,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookPage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 @Mixin(RecipeBookPage.class)
-public abstract class DozenalRecipeBookMixin {
+public abstract class SezimalRecipeBookMixin {
 
     /**
      * Перехватываем создание текста "gui.recipebook.page" внутри метода extractRenderState.
@@ -24,7 +24,7 @@ public abstract class DozenalRecipeBookMixin {
         )
     )
     @SuppressWarnings("null")
-    private MutableComponent dozenium$interceptRecipePageText(String key, Object[] args) {
+    private MutableComponent senarium$interceptRecipePageText(String key, Object[] args) {
         // Проверяем, что это именно тот текст (страница книги рецептов)
         if ("gui.recipebook.page".equals(key)) {
             
@@ -39,7 +39,7 @@ public abstract class DozenalRecipeBookMixin {
                 if (newArgs[i] instanceof Number) {
                     int value = ((Number) newArgs[i]).intValue();
                     // Превращаем число (int) в 12-ричную строку
-                    newArgs[i] = Dozenal.toDozenal(value);
+                    newArgs[i] = Sezimal.toSezimal(value);
                 }
             }
 

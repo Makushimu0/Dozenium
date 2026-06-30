@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 
 @Mixin(targets = "net.minecraft.client.gui.screens.achievement.StatsScreen$GeneralStatisticsList$Entry")
 public class GeneralStatsEntryMixin {
@@ -42,14 +42,14 @@ public class GeneralStatsEntryMixin {
                     float val = Float.parseFloat(numberStr.replace(",", "."));
                     
                     // Используем твой метод для float
-                    return Dozenal.toFloatDozenal(val) + suffix;
+                    return Sezimal.toFloatSezimal(val) + suffix;
                 } else {
                     // Если точек нет, это целое число
                     // Убираем возможные разделители тысяч (если они есть), хотя в ваниле их обычно нет
                     int val = Integer.parseInt(numberStr);
                     
                     // Используем твой метод для int
-                    return Dozenal.toDozenal(val) + suffix;
+                    return Sezimal.toSezimal(val) + suffix;
                 }
             } catch (NumberFormatException e) {
                 // Если попалось что-то сложное (например, время "0:15"), оставляем как есть

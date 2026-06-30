@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import name.modid.util.Dozenal; // Импорт твоего утилитного класса
+import name.modid.util.Sezimal; // Импорт твоего утилитного класса
 import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -39,10 +39,10 @@ public abstract class StatusEffectsDisplayMixin {
         // Если твой метод принимает секунды, раздели durationTicks на 20.
         String dozenalString;
         String H = "";
-        String M = pad2(Dozenal.toDozenal((durationSecs%3599) / 60));
-        String S = pad2(Dozenal.toDozenal(durationSecs%60));
+        String M = pad2(Sezimal.toSezimal((durationSecs%3599) / 60));
+        String S = pad2(Sezimal.toSezimal(durationSecs%60));
         if (durationSecs >= 3600) {
-            H = Dozenal.toDozenal(durationSecs / 3600);
+            H = Sezimal.toSezimal(durationSecs / 3600);
             dozenalString = pad2(H) + ":" + M + ":" + S;
         } else {
             dozenalString = M + ":" + S;

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.gui.ActiveTextCollector;
 import net.minecraft.client.gui.screens.inventory.BookViewScreen;
 import net.minecraft.network.chat.Component;
@@ -15,7 +15,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
 @Mixin(BookViewScreen.class)
-public abstract class DozenalBookScreenMixin {
+public abstract class SezimalBookScreenMixin {
 
     @Shadow private Component pageMsg;
     @Shadow private int currentPage;
@@ -30,13 +30,13 @@ public abstract class DozenalBookScreenMixin {
             shift = At.Shift.AFTER
         )
     )
-    private void dozenium$replacePageText(ActiveTextCollector drawer, boolean bl, CallbackInfo ci) {
+    private void senarium$replacePageText(ActiveTextCollector drawer, boolean bl, CallbackInfo ci) {
         // 1. Получаем оригинальный стиль (цвет, шрифт и т.д.), который игра только что присвоила
         Style originalStyle = this.pageMsg.getStyle();
 
         // 2. Вычисляем наши 12-ричные значения
-        String dozenalCurrent = Dozenal.toDozenal(this.currentPage + 1);
-        String dozenalTotal = Dozenal.toDozenal(this.getNumPages());
+        String dozenalCurrent = Sezimal.toSezimal(this.currentPage + 1);
+        String dozenalTotal = Sezimal.toSezimal(this.getNumPages());
         
         // 3. Создаем новый текст
         MutableComponent newText = Component.translatable("book.pageIndicator", dozenalCurrent, dozenalTotal);

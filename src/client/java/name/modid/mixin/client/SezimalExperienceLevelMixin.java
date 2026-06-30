@@ -10,7 +10,7 @@ import net.minecraft.network.chat.MutableComponent;
 
 @net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 @Mixin(Component.class)
-public interface DozenalExperienceLevelMixin {
+public interface SezimalExperienceLevelMixin {
 
     /**
      * Перехватываем создание текста "gui.experience.level".
@@ -21,14 +21,14 @@ public interface DozenalExperienceLevelMixin {
         at = @At("HEAD"),
         cancellable = true
     )
-    private static void dozenium$interceptXpTranslation(String key, Object[] args, CallbackInfoReturnable<MutableComponent> cir) {
+    private static void senarium$interceptXpTranslation(String key, Object[] args, CallbackInfoReturnable<MutableComponent> cir) {
         if ("gui.experience.level".equals(key) && args.length > 0) {
             Object firstArg = args[0];
             if (firstArg instanceof Number) {
                 int level = ((Number) firstArg).intValue();
                 
                 // Преобразуем уровень в 12-ричную строку через вашу утилиту
-                String dozenStr = name.modid.util.Dozenal.toDozenal(level);
+                String dozenStr = name.modid.util.Sezimal.toSezimal(level);
                 if (dozenStr == null) {
                     dozenStr = "0";
                 }

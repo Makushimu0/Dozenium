@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import name.modid.util.Dozenal;
+import name.modid.util.Sezimal;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.network.chat.Component;
 
 @Mixin(OptionInstance.class)
-public abstract class DozenalSimpleOptionMixin<T> {
+public abstract class SezimalSimpleOptionMixin<T> {
 
     @Shadow @Final @Mutable
     private Function<T, Component> toString;
@@ -29,18 +29,18 @@ public abstract class DozenalSimpleOptionMixin<T> {
      * Оно будет помнить, обработали мы уже эту настройку или нет.
      */
     @Unique
-    private boolean dozenium$isWrapped = false;
+    private boolean senarium$isWrapped = false;
 
     // Паттерн: (число + %)|(дробное)|(целое)
     private static final Pattern NUMBERS = Pattern.compile("(\\d+)(\\s*%)|(\\d+\\.\\d+)|(\\d+)");
 
     @Inject(method = "<init>*", at = @At("RETURN"))
-    private void dozenium$wrapTextGetter(CallbackInfo ci) {
+    private void senarium$wrapTextGetter(CallbackInfo ci) {
         // --- ЗАЩИТА ОТ ДВОЙНОГО СРАБАТЫВАНИЯ ---
-        if (this.dozenium$isWrapped) {
+        if (this.senarium$isWrapped) {
             return; // Если уже обернули, выходим и ничего не делаем
         }
-        this.dozenium$isWrapped = true; // Ставим метку "Обернуто"
+        this.senarium$isWrapped = true; // Ставим метку "Обернуто"
         // ----------------------------------------
 
         Function<T, Component> originalGetter = this.toString;
@@ -80,7 +80,7 @@ public abstract class DozenalSimpleOptionMixin<T> {
                 int val = Integer.parseInt(matcher.group());
                 // Твой метод конвертации процентов
                 // ВАЖНО: Он должен возвращать ЧИСТОЕ число (например "12"), без знака %
-                String replacement = Dozenal.toDozenalPercent(val);
+                String replacement = Sezimal.toSezimalPercent(val);
                 
                 // Если твой метод возвращает "12%", убери знак процента, чтобы не дублировать
                 if (replacement.endsWith("%")) {
@@ -116,7 +116,7 @@ public abstract class DozenalSimpleOptionMixin<T> {
                 if (matcher.group(1) != null) {
                     int val = Integer.parseInt(matcher.group(1));
                     String suffix = matcher.group(2); 
-                    String dozenalVal = Dozenal.toDozenalPercent(val);
+                    String dozenalVal = Sezimal.toSezimalPercent(val);
                     if (dozenalVal.endsWith("%")) dozenalVal = dozenalVal.substring(0, dozenalVal.length() - 1);
                     
                     matcher.appendReplacement(sb, Matcher.quoteReplacement(dozenalVal + suffix));
@@ -124,13 +124,13 @@ public abstract class DozenalSimpleOptionMixin<T> {
                 // Группа 3: Float (1.5)
                 else if (matcher.group(3) != null) {
                     float val = Float.parseFloat(matcher.group(3));
-                    String replacement = Dozenal.toFloatDozenal(val);
+                    String replacement = Sezimal.toFloatSezimal(val);
                     matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement));
                 }
                 // Группа 4: Int (12)
                 else if (matcher.group(4) != null) {
                     int val = Integer.parseInt(matcher.group(4));
-                    String replacement = Dozenal.toDozenal(val);
+                    String replacement = Sezimal.toSezimal(val);
                     matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement));
                 }
             } catch (NumberFormatException e) {
